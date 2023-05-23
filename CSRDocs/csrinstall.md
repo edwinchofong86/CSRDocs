@@ -56,3 +56,17 @@ To install a signed CSR (Certificate Signing Request) certificate on an Ubuntu s
 After restarting the web server, the signed certificate should be installed and actively used for SSL/TLS connections to your Ubuntu server.
 
 Remember to renew the certificate before it expires to ensure uninterrupted secure connections. The renewal process may vary depending on your CA and any automation you have set up.
+
+
+======================================================================
+Self-Signed SSL Certificate creation command
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+
+Add the below SSL configuration lines in virtual host configuration.
+SSLEngine on
+SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
+SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+Apache modules to be enabled
+a2enmod ssl
+a2enmod headers
